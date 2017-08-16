@@ -1,5 +1,5 @@
 CXX ?= g++
-CPPFLAGS ?= -Wall -Wextra -Wno-unused-parameter
+CPPFLAGS ?= -Wall -Wextra
 CXXFLAGS ?= -std=c++11 -pedantic
 # fast options
 CPPFLAGS += -march=native -Ofast

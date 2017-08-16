@@ -58,7 +58,7 @@ class RamDisk {
     constexpr bool trims() const { return false; }
 
     // Performs a DISCARD/TRIM operation (optional)
-    void trim(size_t index, size_t count) { }
+    void trim(size_t, size_t) { }
 };
 
 using namespace std;

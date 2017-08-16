@@ -19,6 +19,7 @@ extern "C" {
 #include <iostream>
 #include <fstream>
 #include <utility>
+#include <tuple>
 #include <sstream>
 #include <vector>
 #include <algorithm>
@@ -148,7 +149,8 @@ class DevExample {
     bool trims() const { return false; }
 
     // Performs a DISCARD/TRIM operation (optional)
-    void trim(size_t index, size_t count) { }
+    void trim(size_t index, size_t count)
+    { std::ignore = index; std::ignore = count; }
 };
 
 
@@ -267,7 +269,7 @@ static inline std::ostream& operator<< (std::ostream& out, const IP4Sock& is) {
 // global variable and signal handler for SIGINT
 
 volatile sig_atomic_t nbd_sig = 0;
-void sighandle(int sig) { nbd_sig = 1; }
+void sighandle(int) { nbd_sig = 1; }
 
 // This class provides the main server functionality.
 // DevT should match the archetype DevExample above.
@@ -493,7 +495,7 @@ class NbdServer {
           case NBD_CMD_DISC:
             logout() << "Requested disconnect request" << std::endl;
             go = false;
-            // note fall-through
+            [[gnu::fallthrough]]; // note fall-through
           case NBD_CMD_FLUSH:
 #ifdef NBDCPP_DEBUG
             logout() << "Performing flush" << std::endl;
